@@ -18,15 +18,18 @@ class admin_commands(commands.Cog):
             await ctx.send('Please specify an ammount of messages to delete')
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def kick(self,ctx, member : discord.Member, *,reason=None):
         await member.kick(reason=reason)
         await ctx.send(f'{member} has been kicked from the server')
     
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def ban(self,ctx, member : discord.Member, *,reason=None):
         await member.ban(reason=reason)
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def unban(self,ctx, *, member):
         banned_users = await ctx.guild.bans()
         member_name,member_discriminator =member.split('#')
@@ -39,10 +42,12 @@ class admin_commands(commands.Cog):
                 return
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def load(self,ctx, extention):
         client.load_extension(f'cogs.{extention}')
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def unload(self,ctx, extention):
         client.unload_extension(f'cogs.{extention}')
 
