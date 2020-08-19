@@ -1,9 +1,7 @@
 import discord
-import random
 import os
 from discord.ext import commands, tasks
-from itertools import cycle
-from classes.order import Order
+import orders
 
 client = commands.Bot(command_prefix = '~')  
 
@@ -15,7 +13,16 @@ def read_token():
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency*1000)}ms')
-       
+
+@client.command()
+async def order(ctx,element,number):
+    member=ctx.author
+    member = str(member)
+    await ctx.send('order has been placed')
+    print(f'ran {member}')
+    new_order=Order(element,number)
+    await ctx.send('order has been placed')
+    number=newOrder.number      
 
 for filename in os.listdir(r'D:\documents\discord bots\discord bot py\order bot\order bot\order-bot\cogs'):
     if filename.endswith('.py'):

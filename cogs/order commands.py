@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from classes.order import Order
+import orders
 
 class order_commands(commands.Cog):
 
@@ -8,10 +8,12 @@ class order_commands(commands.Cog):
         self.client=client
    
     @commands.command()
-    async def order(self,ctx):
-        member=ctx.author.nick
+    async def order2(self,ctx,element,number):
+        member=ctx.author
+        member = str(member)
         await ctx.send('order has been placed')
-        newOrder=Order(element,number)
+        print(f'ran{member}')
+        new_order=orders.Order(element,number)
         await ctx.send('order has been placed')
         number=newOrder.number
 
@@ -24,3 +26,5 @@ class order_commands(commands.Cog):
         
 def setup(client):
     client.add_cog(order_commands(client))
+
+
