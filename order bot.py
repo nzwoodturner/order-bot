@@ -1,7 +1,7 @@
 import discord
 import os
 from discord.ext import commands, tasks
-import orders
+from classes.orders import Order
 
 client = commands.Bot(command_prefix = '~')  
 
@@ -15,7 +15,7 @@ async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency*1000)}ms')
 
 @client.command()
-async def order(ctx,element,number):
+async def order2(ctx,element,number):
     member=ctx.author
     member = str(member)
     await ctx.send('order has been placed')

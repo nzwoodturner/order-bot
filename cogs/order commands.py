@@ -1,21 +1,23 @@
 import discord
 from discord.ext import commands
-import orders
+from classes.orders import Order
 
 class order_commands(commands.Cog):
 
-    def _init_ (self,client):
+    def __init__ (self,client):
         self.client=client
    
     @commands.command()
-    async def order2(self,ctx,element,number):
+    async def order(self,ctx,element,number):
+        global new_order
         member=ctx.author
         member = str(member)
         await ctx.send('order has been placed')
         print(f'ran{member}')
-        new_order=orders.Order(element,number)
+        #Order.create('h',1)
+        new_order=Order(element,number)
         await ctx.send('order has been placed')
-        number=newOrder.number
+        #number=newOrder.number
 
         await ctx.send(f'order has been placed{number}')
     

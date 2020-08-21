@@ -5,7 +5,7 @@ from discord.ext import commands, tasks
 
 class basic_events(commands.Cog):
     
-    def _init_(self,client):
+    def __init__(self,client):
         self.client=client
     
     @commands.Cog.listener()

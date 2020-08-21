@@ -2,3 +2,8 @@ _pycache_/
 cogs/__pycache__/admin commands.cpython-38.pyc
 cogs/__pycache__/basic events.cpython-38.pyc
 token.txt
+cogs/__pycache__/orders.cpython-38.pyc
+classes/__pycache__/orders.cpython-38.pyc
+cogs/__pycache__/order commands.cpython-38.pyc
+cogs/__pycache__/order commands.cpython-38.pyc
+*.pyc
