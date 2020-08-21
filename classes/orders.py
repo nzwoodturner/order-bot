@@ -1,28 +1,28 @@
 import discord
 
-class Order:
+class order:
+    
+    def __init__(self,player,element,number):
 
-    #ID=0
-
-
-    def __init__(self,element,number):
-
-        #self.player=player
+        self.player=player
         self.element=element
         self.number=number
 
-        #self.id=ID
-        #ID=ID+1
+    def get_player():
+        return self.player
 
+    def get_element():
+        return self.element
 
-    def printf(message):
-        print(f'{message}')
+    def get_number():
+        return self.number
 
-    def create(element,number):
-        print('ran')
-        somthing = 1
-        print('ran')
+    def set_player(self,player):
+        self.player=player
 
-    #def get_id():
-        #return self.id
+    def set_element(self,element):
+        self.element=element
+
+    def set_number(self,number):
+        self.number=number
 

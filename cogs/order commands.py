@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from classes.orders import Order
+from classes.orders import order
 
 class order_commands(commands.Cog):
 
@@ -9,22 +9,15 @@ class order_commands(commands.Cog):
    
     @commands.command()
     async def order(self,ctx,element,number):
-        global new_order
         member=ctx.author
         member = str(member)
+        new_order=order(member,element,number)
         await ctx.send('order has been placed')
-        print(f'ran{member}')
-        #Order.create('h',1)
-        new_order=Order(element,number)
-        await ctx.send('order has been placed')
-        #number=newOrder.number
-
-        await ctx.send(f'order has been placed{number}')
     
-    #@commands.command()
-    #async def orderid(self,ctx):
-        #id=newOrder.get_id()
-        #await ctx.send(f'{id}') 
+    @commands.command()
+    async def ordername(self,ctx):
+        name=new_order.get_player()
+        await ctx.send(f'{name}') 
         
 def setup(client):
     client.add_cog(order_commands(client))
