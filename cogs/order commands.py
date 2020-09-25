@@ -31,26 +31,35 @@ class order_commands(commands.Cog):
     @commands.command()
     async def newOrder(self,ctx):
         await ctx.author.send('place your order')
-        #await client.send_message(member,'place your order')
         done=False
+        cost=0
         while (done==False):
-            pass
+            msg = await client.wait_for('message', check=check)
+            await ctx.author.send('order placed')
+            if (msg.guild==None):
+                   content=msg.content
+                   if (content=='Done'):
+                        done=True
+                   else:
+                        number=content[-1]
+                        length=len(content)
+                        element=content[0:(length-2)]
+                        cost=cost+Cost.get_cost(element,number) 
+        await ctx.author.send('order placed')
 
-    @commands.Cog.listener()
-    async def on_message(self,message):
-        if (message.guild==None):
-            content=message.content
-            if (content=='Done'):
-                done=True
-            else:
-                number=content[-1]
-                await message.author.send('done')
-                length=len(content)
-                await message.author.send('done')
-                element=content[0:(length-2)]
-                await message.author.send('done')
-                cost=Cost.get_cost(element,number)
-                await message.author.send('done')    
+            #@commands.Cog.listener()
+           # async def on_message(self,message):
+               # if (message.guild==None):
+                   # content=message.content
+                   # if (content=='Done'):
+                     #   done=True
+                   # else:
+                    #    number=content[-1]
+                    #    length=len(content)
+                     #   element=content[0:(length-2)]
+                     #   cost=Cost.get_cost(element,number) 
+
+ 
    
     @commands.command()
     async def ordername(self,ctx):
