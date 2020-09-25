@@ -19,7 +19,13 @@ def read_token():
     with open(r"D:\documents\discord bots\discord bot py\order bot\order bot\order-bot\token.txt","r") as f:
         lines = f.readlines()
         return lines[0].strip()
-
+with open(r"recipes.JSON") as json_file:
+    recipes=json.load(json_file)
+price_list={"Bauxite":20,"Coal":20,"Quartz":20,"Hematite":20,
+            "Chromite":20,"Malachite":20,"Limestone":20,"Natron":20,
+            "Petalite":20,"Garnierite":20,"Acanthite":20,"Pyrite":20,
+            "Cobaltite":20,"Cryolite":20,"Kolbeckite":20,"Gold Nuggets":20,
+            "Rhodonite":20,"Columbite":20,"Illmenite":20,"Vanadinite":20}        
 
     
 @client.command()
