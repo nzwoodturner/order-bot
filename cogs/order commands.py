@@ -5,11 +5,11 @@ import json
 from classes.Cost import Cost
 
 
-
 class order_commands(commands.Cog):
 
     def __init__ (self,client):
         self.client=client
+        
    
     @commands.command()
     async def order(self,ctx,raw_number,*,element):
@@ -34,17 +34,25 @@ class order_commands(commands.Cog):
         done=False
         cost=0
         while (done==False):
-            msg = await client.wait_for('message', check=check)
-            await ctx.author.send('order placed')
+            msg = await self.client.wait_for('message', check=lambda message: message.author == ctx.author)
+            
             if (msg.guild==None):
                    content=msg.content
+                   split=content.split(", ")
+                   number=int(split[1])
+
+                   await ctx.author.send('order placed')
+
                    if (content=='Done'):
                         done=True
-                   else:
-                        number=content[-1]
+                   elif (Cost().find(split[0])!=False):
+                        await ctx.author.send('order placed')
                         length=len(content)
-                        element=content[0:(length-2)]
-                        cost=cost+Cost.get_cost(element,number) 
+                        await ctx.author.send('order placed')
+                        element=split[0]
+                        await ctx.author.send('order placed')
+                        cost=cost+Cost().get_cost(element,number)
+                   await ctx.author.send('order placed 2') 
         await ctx.author.send('order placed')
 
             #@commands.Cog.listener()
