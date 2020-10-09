@@ -21,6 +21,9 @@ class Cost():
                 return self.recipes[i]
         return False
 
+    def findSkill(self,element,type,teir,industry):
+        pass
+
 
     def get_cost(self,element,number):
 
@@ -28,10 +31,12 @@ class Cost():
         cost=0
         if recipe != False:
             if recipe["type"]=="Ore":
-                return self.price_list[element]*number
+                return self.price_list[element]*(number/recipe["outputQuantity"])
             elif recipe["type"]!="Catalyst":
                 for key in recipe["input"]:
-                    cost=cost+self.get_cost(key,recipe[key])
+                    outputQuantity=recipe["outputQuantity"]
+                    numberNeeded= recipe["input"][key]*(number/outputQuantity)
+                    cost=cost+self.get_cost(key,numberNeeded)
                 return cost
             else:
                 return 0

@@ -40,19 +40,13 @@ class order_commands(commands.Cog):
                    content=msg.content
                    split=content.split(", ")
                    number=int(split[1])
-
-                   await ctx.author.send('order placed')
-
                    if (content=='Done'):
                         done=True
                    elif (Cost().find(split[0])!=False):
-                        await ctx.author.send('order placed')
                         length=len(content)
-                        await ctx.author.send('order placed')
-                        element=split[0]
-                        await ctx.author.send('order placed')
+                        element=split[0]                      
                         cost=cost+Cost().get_cost(element,number)
-                   await ctx.author.send('order placed 2') 
+                   await ctx.author.send(f'cost = {round(cost,2)}') 
         await ctx.author.send('order placed')
 
             #@commands.Cog.listener()
