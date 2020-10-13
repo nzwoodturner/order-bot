@@ -42,10 +42,22 @@ class order_commands(commands.Cog):
                    number=int(split[1])
                    if (content=='Done'):
                         done=True
-                   elif (Cost().find(split[0])!=False):
-                        length=len(content)
-                        element=split[0]                      
-                        cost=cost+Cost().get_cost(element,number)
+                   else:
+                       possibleElements=Cost().findElement(split[0])
+                       if (len(possibleElements)==1):
+                           cost+=Cost().getCost(possibleElements[0],number)
+                       elif(len(possibleElements)<1):
+                           ctx.author.send(f'{split[0]} had multiple matches')
+                           for key in possibleElements:
+                               ctx.author.send(f'{key}')
+                           ctx.author.send(f'please re-enter the correct element')
+                       else:
+                           ctx.author.send(f'Could not find {split[0]}')
+
+                   #elif (Cost().find(split[0])!=False):
+                        #length=len(content)
+                        #element=split[0]                      
+                        #cost=cost+Cost().get_cost(element,number)
                    await ctx.author.send(f'cost = {round(cost,2)}') 
         await ctx.author.send('order placed')
 

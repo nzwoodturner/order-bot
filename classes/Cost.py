@@ -22,6 +22,31 @@ class Cost():
         pass
 
 
+    def findElement(self,element):
+        elementSplit=element.split()
+        elementSplitLength=len(elementSplit)
+        for i in range (len(self.recipes)):
+            nameSplit=self.recipes[i]["name"].split()
+            nameSplitLength=len(nameSplit)
+            m=0
+            if ((nameSplitLength>=elementSplitLength) and (nameSplitLength<=elementSplitLength+1)):
+                for i in range(elementSplitLength):
+                    if (self.match(elementSplit[i],nameSplit)==True):
+                        m+=1
+                if (m==nameSplitLength):
+                    out.clear()
+                    out[0]=self.recipes[i]["name"]
+                    return out
+                elif (m==nameSplitLength-1):
+                    out.append(self.recipes[i]["name"])
+        return out
+
+    def match(self, elementPart,nameSplit):
+        for i in range (len(nameSplit)):
+            if (nameSplit[i]==elementPart):
+                return True
+        return False
+
     def find(self,element):
         for i in range (len(self.recipes)):
             if (self.recipes[i]["name"]==element):
@@ -34,7 +59,7 @@ class Cost():
             if (("target" in self.skills[i])==False):
                 for j in range (len(self.skills[i]["data"])):
                     if (self.skills[i]["data"][j]==recipe["name"]):
-                        value+=self.skills[i]["targets"][j]["amount"]*self.skills[i]["values"][j]
+                        value=self.skills[i]["targets"][j]["amount"]*self.skills[i]["values"][j]
                         craftingSkills[self.skills[i]["targets"][j]["type"]]=value
             else:
                 if(self.skills[i]["target"]==recipe["type"]):
@@ -43,6 +68,8 @@ class Cost():
                             value=self.skills[i]["targets"][j]["amount"]*self.skills[i]["values"][j]
                             craftingSkills[self.skills[i]["targets"][j]["type"]]+=value
                         elif (self.skills[i]["data"][j]=="Efficiency"):
+                            amount=self.skills[i]["targets"][j]["amount"]
+                            skillLevel=self.skills[i]["values"][j]
                             value=self.skills[i]["targets"][j]["amount"]*self.skills[i]["values"][j]
                             craftingSkills[self.skills[i]["targets"][j]["type"]]+=value
                         elif (self.tier(self.skills[i]["data"][j])==recipe["tier"]):
