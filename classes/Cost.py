@@ -6,11 +6,11 @@ class Cost():
         recipes=json.load(json_file)
     with open(r"skills.JSON") as json_file:
         skills=json.load(json_file)
-    price_list={"Bauxite":20,"Coal":20,"Quartz":20,"Hematite":20,
-            "Chromite":20,"Malachite":20,"Limestone":20,"Natron":20,
-            "Petalite":20,"Garnierite":20,"Acanthite":20,"Pyrite":20,
-            "Cobaltite":20,"Cryolite":20,"Kolbeckite":20,"Gold Nuggets":20,
-            "Rhodonite":20,"Columbite":20,"Illmenite":20,"Vanadinite":20}    
+    price_list={"Bauxite":22,"Coal":23,"Quartz":22.5,"Hematite":28,
+            "Chromite":43,"Malachite":47,"Limestone":55,"Natron":30,
+            "Petalite":67,"Garnierite":60,"Acanthite":115,"Pyrite":65,
+            "Cobaltite":500,"Cryolite":350,"Kolbeckite":270,"Gold Nuggets":230,
+            "Rhodonite":310,"Columbite":750,"Illmenite":550,"Vanadinite":550}   
 
     itemTier= ["Basic",
            "Uncommon",
@@ -25,17 +25,18 @@ class Cost():
     def findElement(self,element):
         elementSplit=element.split()
         elementSplitLength=len(elementSplit)
+        out=[]
         for i in range (len(self.recipes)):
             nameSplit=self.recipes[i]["name"].split()
             nameSplitLength=len(nameSplit)
             m=0
             if ((nameSplitLength>=elementSplitLength) and (nameSplitLength<=elementSplitLength+1)):
-                for i in range(elementSplitLength):
-                    if (self.match(elementSplit[i],nameSplit)==True):
+                for j in range(elementSplitLength):
+                    if (self.match(elementSplit[j],nameSplit)==True):
                         m+=1
                 if (m==nameSplitLength):
                     out.clear()
-                    out[0]=self.recipes[i]["name"]
+                    out.append(self.recipes[i]["name"])
                     return out
                 elif (m==nameSplitLength-1):
                     out.append(self.recipes[i]["name"])

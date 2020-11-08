@@ -33,6 +33,7 @@ class order_commands(commands.Cog):
         await ctx.author.send('place your order')
         done=False
         cost=0
+        string=""
         while (done==False):
             msg = await self.client.wait_for('message', check=lambda message: message.author == ctx.author)
             
@@ -45,11 +46,12 @@ class order_commands(commands.Cog):
                    else:
                        possibleElements=Cost().findElement(split[0])
                        if (len(possibleElements)==1):
-                           cost+=Cost().getCost(possibleElements[0],number)
-                       elif(len(possibleElements)<1):
+                           cost+=Cost().get_cost(possibleElements[0],number)
+                       elif(len(possibleElements)>1):
                            ctx.author.send(f'{split[0]} had multiple matches')
                            for key in possibleElements:
-                               ctx.author.send(f'{key}')
+                               string+= f" {key} \n"
+                           ctx.author.send(string)
                            ctx.author.send(f'please re-enter the correct element')
                        else:
                            ctx.author.send(f'Could not find {split[0]}')
