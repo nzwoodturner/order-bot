@@ -2,15 +2,15 @@ import json
 
 class Cost():
     """description of class"""
-    with open(r"recipes.JSON") as json_file:
+    with open(r"recipiesUpdated.JSON") as json_file:
         recipes=json.load(json_file)
     with open(r"skills.JSON") as json_file:
         skills=json.load(json_file)
-    price_list={"Bauxite":22,"Coal":23,"Quartz":22.5,"Hematite":28,
-            "Chromite":43,"Malachite":47,"Limestone":55,"Natron":30,
-            "Petalite":67,"Garnierite":60,"Acanthite":115,"Pyrite":65,
-            "Cobaltite":500,"Cryolite":350,"Kolbeckite":270,"Gold Nuggets":230,
-            "Rhodonite":310,"Columbite":750,"Illmenite":550,"Vanadinite":550}   
+    price_list={"Bauxite":25,"Coal":25,"Quartz":25,"Hematite":25,
+            "Chromite":55,"Malachite":65,"Limestone":65,"Natron":49,
+            "Petalite":144,"Garnierite":115,"Acanthite":155,"Pyrite":105,
+            "Cobaltite":552,"Cryolite":660,"Kolbeckite":401,"Gold Nuggets":360,
+            "Rhodonite":310,"Columbite":750,"Illmenite":550,"Vanadinite":550}    
 
     itemTier= ["Basic",
            "Uncommon",
@@ -49,23 +49,20 @@ class Cost():
         return False
 
     def find(self,element):
-        for i in range (len(self.recipes)):
-            if (self.recipes[i]["name"]==element):
-                return self.recipes[i]
-        return False
+        return self.recipes[element]
 
-    def findSkill(self,recipe):
-        craftingSkills= {"Input":0,"Output":0,"Time":0}              
+    def findSkill(self,recipe,element):
+        craftingSkills= {"Input":0,"Output":0,"Time":0,"Speed":0}              
         for i in range (len(self.skills)):
             if (("target" in self.skills[i])==False):
                 for j in range (len(self.skills[i]["data"])):
-                    if (self.skills[i]["data"][j]==recipe["name"]):
+                    if (self.skills[i]["data"][j]==element):
                         value=self.skills[i]["targets"][j]["amount"]*self.skills[i]["values"][j]
                         craftingSkills[self.skills[i]["targets"][j]["type"]]=value
             else:
                 if(self.skills[i]["target"]==recipe["type"]):
                     for j in range  (len(self.skills[i]["data"])):
-                        if (self.skills[i]["data"][j]==recipe["name"]):
+                        if (self.skills[i]["data"][j]==element):
                             value=self.skills[i]["targets"][j]["amount"]*self.skills[i]["values"][j]
                             craftingSkills[self.skills[i]["targets"][j]["type"]]+=value
                         elif (self.skills[i]["data"][j]=="Efficiency"):
@@ -92,7 +89,7 @@ class Cost():
     def get_cost(self,element,number):
 
         recipe=self.find(element)
-        skill=self.findSkill(recipe)
+        skill=self.findSkill(recipe,element)
         cost=0
         if recipe != False:
             if recipe["type"]=="Ore":
